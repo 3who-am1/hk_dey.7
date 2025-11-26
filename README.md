@@ -34,15 +34,11 @@ Acest repo include:
 • Studii tehnice (Web, Crypto, OSINT etc.)
 • Documentație, explicații și rezolvări
 
-Exemple de directoare:
+Exemple de categori
 
-Easy/
-Entry-Level/
 Cryptography/
 Forensics/
 Misc/
 Reverse_Engineering/
 Steganography/
-Web/
-PicoCTF/
 ...
