@@ -126,6 +126,38 @@ Dar ceva se simte neregula, si este aproape ca si cum dezvoltatorul a lasat o ca
 
 Flag : picoCTF{brut4_f0rc4_3e21b3a3}
 
+---
+**##Oare de ce a functionat aceasta metoda?**
+
+Validarea input-ului: Serverul valida că email și password sunt string-uri, dar nu verifica dacă sunt obiecte JSON cu operatori MongoDB
+
+Architectural flaw: Serverul pasa input-ul direct în query fără sanitizare
+
+Single user: Probabil exista un singur utilizator în baza de date
+
+Alte metode care ar fi putut funcționa:
+                                        
+                                              json
+                                                {"email": {"$regex": ".*"}, "password": {"$regex": ".*"}}
+                                                {"email": {"$exists": true}, "password": {"$exists": true}}
+                                                {"$where": "true"}
+
+**Cum să previnem asta?**
+
+Input validation: Verifică că email și password sunt string-uri, nu obiecte
+Sanitizare: Folosește biblioteci pentru a preveni NoSQL injection
+ORM/ODM: Folosește Mongoose cu schema strictă
+
+
+**Learning points:**
+
+Always check source code pentru comentarii și indicii
+Adapt attack to technology (SQL vs NoSQL vs GraphQL)
+Understand error messages - ele oferă indicii despre stack-ul tehnologic
+Test different injection vectors când una nu funcționează
+
+---
+
 
 ##**SUCCES :)))**
 
