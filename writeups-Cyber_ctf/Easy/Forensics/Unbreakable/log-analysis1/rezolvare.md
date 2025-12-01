@@ -23,7 +23,6 @@ Noi trebuie doar sa gasim raspunsurile la urmatoarele intrebari:
 
 **Rezolvare:**
 
----
 1. vedem ca trebuie sa extragem datele intr-un format de tip .zip,
    folosind comanda: 
                           
@@ -53,7 +52,7 @@ Noi trebuie doar sa gasim raspunsurile la urmatoarele intrebari:
                            
                              cat SystemInfo/output.txt
    
-   ###**Ne afiseaza:**
+###**Ne afiseaza:**
 
 ...
 
