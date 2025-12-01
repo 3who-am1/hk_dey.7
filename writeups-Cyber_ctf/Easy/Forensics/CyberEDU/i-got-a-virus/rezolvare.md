@@ -76,7 +76,7 @@ Ne afiseaza:
    
         2016-01-30 02:56:43 UTC ---> raspuns la intrebarea Q4
 
-5. La ultima intrebare ne spune ca, care ar fi ip-ul rau intetionat care a fost marcat ca rau intentionat utilizat de esantiorul de malware
+5. La ultima intrebare ne spune ca, care ar fi ip-ul rau intentionat care a fost marcat ca rau intentionat utilizat de esantiorul de malware
    Sa putem afla ip-ul acela, ar trebui sa analizam tot pe **VirusTotal** la **Relations**
    si mai jos la **Contacted IP addresses** vedem ca is vreo 45 de ip-uri, dar cel mai relevant raspuns ar fi prima optiune intotdeauna de luat
    iar acela ar fi: 13.107.4.53
