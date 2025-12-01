@@ -24,11 +24,12 @@ mediu **SANDBOX** la intreaga provocare, si putem rezolva doar folosind **VirusT
 1. La prima intrebare ne spune, care este SHA256 al dosarului dat?
    Sa stim care este SHA256 putem folosi comanda aceasta:
  
-                        ```text
+```text
 
 sha256sum "malware-sample"
 
-                        text```
+text```
+
 Ne afiseaza:
  
         4c1dc737915d76b7ce579abddaba74ead6fdb5b519a1ea45308b8c49b950655c  malware-sample
