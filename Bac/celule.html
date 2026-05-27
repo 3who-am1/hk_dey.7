@@ -2,8 +2,8 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Celula - Clasa a IX-a | Lecție Interactivă</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celula - Clasa a IX-a | Biologie</title>
     <style>
         * {
             margin: 0;
@@ -12,354 +12,269 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 20px;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            padding: 40px 20px;
+            color: #1a1a1a;
         }
 
-        /* Container principal - aspect de card */
-        .container {
-            max-width: 1100px;
+        /* Container principal - stil cărți didactice */
+        .lectie-container {
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
             overflow: hidden;
-            padding: 30px;
+            padding: 40px;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
-            color: white;
-            padding: 30px;
-            margin: -30px -30px 30px -30px;
-            border-bottom: 5px solid #ffc107;
+        /* Header cu bare de progres (inspirat din model) */
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-bottom: 30px;
         }
 
-        .header h1 {
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #2c7da0;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .titlu-mare {
             font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-weight: 600;
+            color: #0b3b4f;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
         }
 
-        .header .subtitlu {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .autor {
+            color: #5e6f8d;
+            border-left: 4px solid #2c7da0;
+            padding-left: 16px;
+            margin: 20px 0 30px 0;
+            font-size: 0.95rem;
         }
 
-        .badge {
-            background: #ffc107;
-            color: #1b5e20;
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 12px;
+        /* Carduri pentru secțiuni */
+        .sectiune {
+            margin-bottom: 45px;
         }
 
-        /* Secțiuni */
-        .section {
-            margin-bottom: 35px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 25px;
-        }
-
-        .section-title {
+        .sectiune h2 {
             font-size: 1.6rem;
-            color: #1b5e20;
+            font-weight: 500;
+            color: #1f5068;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 5px solid #4caf50;
-            padding-left: 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #eaeef5;
         }
 
-        .section-title i {
-            font-size: 1.8rem;
+        .sectiune h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            color: #2c7da0;
         }
 
-        /* Carduri pentru tipuri de celule */
         .grid-2 {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             flex-wrap: wrap;
             margin: 20px 0;
         }
 
-        .card {
+        .card-tip {
             flex: 1;
-            min-width: 250px;
-            background: #f9f9f9;
+            background: #f8fafc;
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease;
+            border: 1px solid #e2e8f0;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .card-tip h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #0f3b4f;
         }
 
-        .card h3 {
-            color: #1b5e20;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #c8e6c9;
-            padding-bottom: 8px;
+        .lista-organite {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
         }
 
-        .card ul {
-            padding-left: 20px;
+        .organit {
+            background: #f9f9ff;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border-left: 4px solid #2c7da0;
+            font-size: 0.95rem;
         }
 
-        .card li {
-            margin: 8px 0;
-        }
-
-        /* Acordeon (pentru organite) */
-        .accordion-item {
-            background: #f5f5f5;
-            margin: 10px 0;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-        .accordion-header {
-            background: #e8f5e9;
-            padding: 16px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #1b5e20;
-            transition: background 0.2s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-header:hover {
-            background: #c8e6c9;
-        }
-
-        .accordion-header::after {
-            content: "▼";
-            font-size: 0.8rem;
-            transition: transform 0.2s;
-        }
-
-        .accordion-item.active .accordion-header::after {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            padding: 0 20px;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: white;
-            border-top: 0px solid #e0e0e0;
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 300px;
-            padding: 15px 20px;
-            border-top-width: 1px;
-        }
-
-        /* Tabel comparativ */
-        .comparison-table {
+        .tabel-comparativ {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
             background: white;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            margin: 15px 0;
         }
 
-        .comparison-table th, .comparison-table td {
-            border: 1px solid #ddd;
+        .tabel-comparativ th {
+            background: #e9f0f5;
             padding: 12px;
             text-align: left;
+            font-weight: 600;
         }
 
-        .comparison-table th {
-            background: #2e7d32;
-            color: white;
+        .tabel-comparativ td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .comparison-table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        /* Quiz */
-        .quiz-question {
-            background: #fef7e0;
-            border-left: 6px solid #ffc107;
-            padding: 18px;
+        /* Test (quiz) stil asemănător modelului */
+        .quiz-item {
+            background: #fefdf7;
+            border: 1px solid #e9e5d5;
+            border-radius: 20px;
+            padding: 18px 22px;
             margin: 20px 0;
-            border-radius: 16px;
         }
 
-        .quiz-question p {
-            font-weight: bold;
-            margin-bottom: 12px;
+        .quiz-intrebare {
+            font-weight: 600;
             font-size: 1.05rem;
+            margin-bottom: 12px;
         }
 
-        .quiz-option {
+        .quiz-optiune {
             display: block;
-            margin: 10px 0;
+            margin: 8px 0;
             padding: 8px 12px;
             background: white;
             border-radius: 40px;
-            cursor: pointer;
-            transition: background 0.2s;
             border: 1px solid #ddd;
+            cursor: pointer;
+            transition: 0.1s;
         }
 
-        .quiz-option:hover {
-            background: #e8f5e9;
+        .quiz-optiune:hover {
+            background: #eef2ff;
         }
 
-        .quiz-option.selected {
-            background: #c8e6c9;
-            border-color: #2e7d32;
+        .quiz-optiune.selected {
+            background: #d9e8f5;
+            border-color: #2c7da0;
         }
 
         .quiz-feedback {
             margin-top: 12px;
-            font-style: italic;
-            color: #555;
+            font-size: 0.9rem;
+            padding-left: 8px;
         }
 
         button {
-            background: #2e7d32;
+            background: #2c7da0;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 1rem;
+            margin-right: 12px;
             margin-top: 8px;
-            transition: background 0.2s;
         }
 
         button:hover {
-            background: #1b5e20;
+            background: #1f5e7a;
         }
 
-        .footer {
+        .final {
             text-align: center;
             margin-top: 40px;
-            padding-top: 20px;
-            font-size: 0.8rem;
-            color: #777;
-            border-top: 1px solid #ddd;
+            padding: 24px;
+            background: #ebf4f8;
+            border-radius: 28px;
+            font-size: 1rem;
+            color: #1f5068;
         }
 
-        @media (max-width: 700px) {
-            .container {
-                padding: 20px;
+        hr {
+            margin: 20px 0;
+            border: none;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        @media (max-width: 650px) {
+            .lectie-container {
+                padding: 24px;
             }
-            .header {
-                margin: -20px -20px 20px -20px;
-                padding: 20px;
-            }
-            .section-title {
-                font-size: 1.3rem;
+            .titlu-mare {
+                font-size: 1.7rem;
             }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>🧬 Celula – unitatea vieții</h1>
-        <div class="subtitlu">Lecție interactivă | Clasa a IX-a | Biologie</div>
-        <div class="badge">🎓 Material realizat pe baza schiței de lecție</div>
+<div class="lectie-container">
+    <!-- Bară simbolică de progres -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <!-- SECȚIUNEA 1: Definiție și tipuri -->
-    <div class="section">
-        <div class="section-title">
-            <span>🔬</span> 1. Ce este celula?
-        </div>
-        <p><strong>Definiție:</strong> Celula este unitatea structurală și funcțională a tuturor organismelor vii.</p>
+    <div class="titlu-mare">🧬 Celula – unitatea vieții</div>
+    <div class="autor">
+        Autor: Prof. Gina Bordea<br>
+        Disciplina: Biologie | Clasa a IX-a | 1 oră / săptămână
+    </div>
+
+    <!-- SECȚIUNEA 1 -->
+    <div class="sectiune">
+        <h2>📖 Ce este celula?</h2>
+        <p><strong>Definiție:</strong> Celula reprezintă unitatea structurală și funcțională a tuturor organismelor vii.</p>
         <div class="grid-2">
-            <div class="card">
-                <h3>🦠 Celula procariotă</h3>
-                <ul>
-                    <li>Fără nucleu organizat</li>
-                    <li>Material genetic – ADN liber în citoplasmă</li>
-                    <li>Exemplu: bacterii, alge albastre-verzi</li>
-                    <li>Perete celular rigid (fără celuloză)</li>
-                </ul>
+            <div class="card-tip">
+                <h4>🦠 Celula procariotă</h4>
+                <p>Fără nucleu organizat, material genetic liber în citoplasmă. Specifică bacteriilor și algelor albastre-verzi.</p>
+                <p><em>Perete celular rigid (fără celuloză).</em></p>
             </div>
-            <div class="card">
-                <h3>🌱 Celula eucariotă</h3>
-                <ul>
-                    <li>Are nucleu adevărat</li>
-                    <li>Organite membranare (mitocondrii, Golgi etc.)</li>
-                    <li>Exemplu: celule animale, vegetale, fungi</li>
-                    <li>Poate avea perete celular (la plante)</li>
-                </ul>
+            <div class="card-tip">
+                <h4>🌿 Celula eucariotă</h4>
+                <p>Nucleu adevărat, organite membranare. Tipică pentru plante, animale și ciuperci.</p>
+                <p><em>Poate prezenta perete celular (la plante).</em></p>
             </div>
         </div>
     </div>
 
-    <!-- SECȚIUNEA 2: Structura celulei eucariote + Acordeon organite -->
-    <div class="section">
-        <div class="section-title">
-            <span>🧫</span> 2. Structura celulei eucariote
-        </div>
-        <p>Celula eucariotă are trei componente principale: <strong>învelișul celular, citoplasma și nucleul</strong>.</p>
-
-        <h3 style="margin: 20px 0 10px 0;">📦 Organite celulare (click pentru detalii)</h3>
-        <div class="accordion" id="accordionOrganite">
-            <div class="accordion-item">
-                <div class="accordion-header">Mitocondriile</div>
-                <div class="accordion-content">⚡ Au rol în respirația celulară, produc energie sub formă de ATP. Prezintă membrană dublă.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Reticulul endoplasmatic</div>
-                <div class="accordion-content">📦 Poate fi neted (sintetizează lipide) sau rugos (cu ribozomi, sinteză proteică).</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Ribozomii</div>
-                <div class="accordion-content">🧬 Sinteza proteinelor. Se găsesc liberi în citoplasmă sau pe RER. Membrană simplă.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Aparatul Golgi</div>
-                <div class="accordion-content">📤 Situat lângă nucleu, are rol în secreția celulară și ambalarea proteinelor.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Lizozomii</div>
-                <div class="accordion-content">🧹 Digestie intracelulară. Enzime care descompun substanțe. Membrană simplă.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Centrozomul</div>
-                <div class="accordion-content">🌀 Situat lângă nucleu, formează fusul de diviziune în timpul mitozei.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Vacuolele</div>
-                <div class="accordion-content">💧 Conțin suc vacuolar (apă, substanțe). Rol în menținerea turgorului la plante.</div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Plastide (cloroplaste)</div>
-                <div class="accordion-content">🌿 Specifice celulei vegetale. Cloroplastele conțin clorofilă și realizează fotosinteza. Membrană dublă.</div>
-            </div>
+    <!-- SECȚIUNEA 2: structură eucariotă + organite -->
+    <div class="sectiune">
+        <h2>🔬 Structura celulei eucariote</h2>
+        <p>Celula eucariotă este alcătuită din <strong>membrană celulară, citoplasmă și nucleu</strong>. În citoplasmă se găsesc organite specializate.</p>
+        <h3>Organite celulare (roluri principale)</h3>
+        <div class="lista-organite">
+            <div class="organit"><strong>Mitocondriile</strong> – respirație celulară, produc energie (ATP), membrană dublă.</div>
+            <div class="organit"><strong>Reticulul endoplasmic</strong> – sinteză de lipide (neted) și proteine (rugos).</div>
+            <div class="organit"><strong>Ribozomii</strong> – sinteză proteică (membrană simplă).</div>
+            <div class="organit"><strong>Aparatul Golgi</strong> – secreție celulară, ambalarea substanțelor.</div>
+            <div class="organit"><strong>Lizozomii</strong> – digestie intracelulară.</div>
+            <div class="organit"><strong>Centrozomul</strong> – formarea fusului de diviziune.</div>
+            <div class="organit"><strong>Vacuolele</strong> – depozitare apă / substanțe (suc vacuolar).</div>
+            <div class="organit"><strong>Cloroplastele</strong> – fotosinteză (specifice plantelor, membrană dublă).</div>
         </div>
 
-        <h3 style="margin: 30px 0 10px 0;">⚖️ Diferențe cheie: celulă animală vs. vegetală</h3>
-        <table class="comparison-table">
-            <thead>
-                <tr><th>Caracteristică</th><th>Celulă animală</th><th>Celulă vegetală</th></tr>
-            </thead>
+        <h3>Diferențe celulă animală vs. vegetală</h3>
+        <table class="tabel-comparativ">
+            <thead><tr><th>Caracteristică</th><th>Celulă animală</th><th>Celulă vegetală</th></tr></thead>
             <tbody>
                 <tr><td>Perete celular</td><td>❌ Nu are</td><td>✅ Are (celuloză)</td></tr>
                 <tr><td>Cloroplaste</td><td>❌ Nu are</td><td>✅ Are</td></tr>
@@ -369,114 +284,104 @@
         </table>
     </div>
 
-    <!-- SECȚIUNEA 3: Quiz interactiv -->
-    <div class="section">
-        <div class="section-title">
-            <span>📝</span> 3. Evaluare rapidă
-        </div>
-        <p>Răspunde la întrebările de mai jos. Vei primi feedback imediat.</p>
-
-        <div id="quizContainer">
-            <!-- Întrebarea 1 -->
-            <div class="quiz-question" data-correct="B">
-                <p>1. Care dintre următoarele structuri este prezentă doar în celula vegetală?</p>
-                <label class="quiz-option"><input type="radio" name="q1" value="A"> A) Membrană celulară</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="B"> B) Perete celular</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="C"> C) Ribozom</label>
+    <!-- SECȚIUNEA 3: QUIZ tip LIVRESQ -->
+    <div class="sectiune">
+        <h2>📝 Test de evaluare</h2>
+        <div id="quiz-container">
+            <div class="quiz-item" data-correct="B">
+                <div class="quiz-intrebare">1. Care structură este prezentă DOAR în celula vegetală?</div>
+                <label class="quiz-optiune"><input type="radio" name="q1" value="A"> A) Membrană celulară</label>
+                <label class="quiz-optiune"><input type="radio" name="q1" value="B"> B) Perete celular</label>
+                <label class="quiz-optiune"><input type="radio" name="q1" value="C"> C) Ribozom</label>
                 <div class="quiz-feedback"></div>
             </div>
-
-            <!-- Întrebarea 2 -->
-            <div class="quiz-question" data-correct="A">
-                <p>2. Ce organită este responsabilă de producerea energiei în celulă?</p>
-                <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Mitocondriul</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Nucleul</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Aparatul Golgi</label>
+            <div class="quiz-item" data-correct="A">
+                <div class="quiz-intrebare">2. Unde are loc producerea energiei în celulă?</div>
+                <label class="quiz-optiune"><input type="radio" name="q2" value="A"> A) Mitocondriu</label>
+                <label class="quiz-optiune"><input type="radio" name="q2" value="B"> B) Nucleu</label>
+                <label class="quiz-optiune"><input type="radio" name="q2" value="C"> C) Aparat Golgi</label>
                 <div class="quiz-feedback"></div>
             </div>
-
-            <!-- Întrebarea 3 (din proiectul didactic – mitoză) -->
-            <div class="quiz-question" data-correct="B">
-                <p>3. Mitoza este importantă pentru:</p>
-                <label class="quiz-option"><input type="radio" name="q3" value="A"> A) Doar producerea de gameti</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="B"> B) Creștere și regenerare</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="C"> C) Fotosinteză</label>
+            <div class="quiz-item" data-correct="B">
+                <div class="quiz-intrebare">3. Ce tip de celulă NU are nucleu organizat?</div>
+                <label class="quiz-optiune"><input type="radio" name="q3" value="A"> A) Eucariotă</label>
+                <label class="quiz-optiune"><input type="radio" name="q3" value="B"> B) Procariotă</label>
+                <label class="quiz-optiune"><input type="radio" name="q3" value="C"> C) Ambele</label>
                 <div class="quiz-feedback"></div>
             </div>
-
-            <!-- Întrebarea 4 (procariot vs eucariot) -->
-            <div class="quiz-question" data-correct="A">
-                <p>4. Ce tip de celulă nu are nucleu organizat?</p>
-                <label class="quiz-option"><input type="radio" name="q4" value="A"> A) Procariotă</label>
-                <label class="quiz-option"><input type="radio" name="q4" value="B"> B) Eucariotă</label>
-                <label class="quiz-option"><input type="radio" name="q4" value="C"> C) Ambele</label>
+            <div class="quiz-item" data-correct="B">
+                <div class="quiz-intrebare">4. Mitoza este importantă pentru:</div>
+                <label class="quiz-optiune"><input type="radio" name="q4" value="A"> A) Doar producerea de gameți</label>
+                <label class="quiz-optiune"><input type="radio" name="q4" value="B"> B) Creștere și regenerare</label>
+                <label class="quiz-optiune"><input type="radio" name="q4" value="C"> C) Fotosinteză</label>
                 <div class="quiz-feedback"></div>
             </div>
         </div>
-        <button id="checkQuizBtn">✅ Verifică răspunsurile</button>
-        <button id="resetQuizBtn" style="background:#757575; margin-left:10px;">⟳ Resetează</button>
+        <button id="checkQuiz">✅ Verifică răspunsurile</button>
+        <button id="resetQuiz">⟳ Resetează</button>
     </div>
 
-    <div class="footer">
-        Lecție realizată pe baza schiței „Celula – clasa a IX-a” • Material interactiv pentru uz didactic
+    <hr>
+    <div class="final">
+        🎉 ACUM S-A FINALIZAT LECȚIA! <br> 
+        Te invit să recitești secțiunile și să refaci testul pentru a fixa cunoștințele.
     </div>
 </div>
 
 <script>
-    // Acordeon functionality
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            item.classList.toggle('active');
+    // Bara de progres simbolică (se completează când se verifică testul)
+    function updateProgress() {
+        const total = document.querySelectorAll('.quiz-item').length;
+        let answered = 0;
+        document.querySelectorAll('.quiz-item').forEach(item => {
+            const selected = item.querySelector('input[type="radio"]:checked');
+            if (selected) answered++;
         });
-    });
+        const percent = (answered / total) * 100;
+        document.getElementById('progressFill').style.width = percent + '%';
+    }
 
-    // Quiz logic
-    const quizQuestions = document.querySelectorAll('.quiz-question');
-    const checkBtn = document.getElementById('checkQuizBtn');
-    const resetBtn = document.getElementById('resetQuizBtn');
-
-    function checkAnswers() {
-        quizQuestions.forEach(q => {
-            const selectedRadio = q.querySelector('input[type="radio"]:checked');
-            const correctValue = q.getAttribute('data-correct');
-            const feedbackDiv = q.querySelector('.quiz-feedback');
+    // Verificare răspunsuri
+    document.getElementById('checkQuiz').addEventListener('click', () => {
+        const items = document.querySelectorAll('.quiz-item');
+        items.forEach(item => {
+            const selectedRadio = item.querySelector('input[type="radio"]:checked');
+            const correctVal = item.getAttribute('data-correct');
+            const feedbackDiv = item.querySelector('.quiz-feedback');
             if (selectedRadio) {
-                if (selectedRadio.value === correctValue) {
+                if (selectedRadio.value === correctVal) {
                     feedbackDiv.innerHTML = '✅ Corect!';
-                    feedbackDiv.style.color = '#2e7d32';
+                    feedbackDiv.style.color = '#2c7da0';
                 } else {
-                    feedbackDiv.innerHTML = `❌ Incorect. Răspunsul corect este ${correctValue}.`;
-                    feedbackDiv.style.color = '#c62828';
+                    feedbackDiv.innerHTML = `❌ Incorect. Răspunsul corect este ${correctVal}.`;
+                    feedbackDiv.style.color = '#b33';
                 }
             } else {
-                feedbackDiv.innerHTML = '⚠️ Nu ai selectat niciun răspuns.';
-                feedbackDiv.style.color = '#ff8f00';
+                feedbackDiv.innerHTML = '⚠️ Selectează un răspuns.';
+                feedbackDiv.style.color = '#e67e22';
             }
         });
-    }
+        updateProgress();
+    });
 
-    function resetQuiz() {
-        quizQuestions.forEach(q => {
-            const radios = q.querySelectorAll('input[type="radio"]');
-            radios.forEach(radio => radio.checked = false);
-            const feedbackDiv = q.querySelector('.quiz-feedback');
-            feedbackDiv.innerHTML = '';
-        });
-    }
+    // Resetare quiz + feedback + bară
+    document.getElementById('resetQuiz').addEventListener('click', () => {
+        const allRadios = document.querySelectorAll('.quiz-item input[type="radio"]');
+        allRadios.forEach(radio => radio.checked = false);
+        const feedbacks = document.querySelectorAll('.quiz-feedback');
+        feedbacks.forEach(fb => fb.innerHTML = '');
+        document.getElementById('progressFill').style.width = '0%';
+        // elimină clasa selected vizuală
+        document.querySelectorAll('.quiz-optiune').forEach(opt => opt.classList.remove('selected'));
+    });
 
-    checkBtn.addEventListener('click', checkAnswers);
-    resetBtn.addEventListener('click', resetQuiz);
-
-    // Adaugă stil pentru opțiunea selectată (vizual)
-    document.querySelectorAll('.quiz-option').forEach(opt => {
+    // evidențiere vizuală opțiune selectată
+    document.querySelectorAll('.quiz-optiune').forEach(opt => {
         opt.addEventListener('click', function() {
-            const parent = this.closest('.quiz-question');
-            parent.querySelectorAll('.quiz-option').forEach(optInner => {
-                optInner.classList.remove('selected');
-            });
+            const parentItem = this.closest('.quiz-item');
+            parentItem.querySelectorAll('.quiz-optiune').forEach(o => o.classList.remove('selected'));
             this.classList.add('selected');
+            updateProgress();
         });
     });
 </script>
